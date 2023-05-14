@@ -1,6 +1,4 @@
-import 'package:bases_web/router/router_generator.dart';
-import 'package:bases_web/ui/pages/counter_page.dart';
-import 'package:bases_web/ui/pages/counter_provider_page%20copy.dart';
+import 'package:bases_web/router/route_generator.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -10,15 +8,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rutas App',
       initialRoute: 'stateful',
-      routes: {
-        'stateful': (context) => const CounterPage(),
-        'provider': (context) => const CounterProviderPage(),
-      },
-      onGenerateRoute: RouterGenerator.generateRoute,
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
