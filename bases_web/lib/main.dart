@@ -1,3 +1,4 @@
+import 'package:bases_web/router/router_generator.dart';
 import 'package:bases_web/ui/pages/counter_page.dart';
 import 'package:bases_web/ui/pages/counter_provider_page%20copy.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         'stateful': (context) => const CounterPage(),
         'provider': (context) => const CounterProviderPage(),
       },
+      onGenerateRoute: RouterGenerator.generateRoute,
     );
   }
 }
