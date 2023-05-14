@@ -16,7 +16,6 @@ class _CounterPageView extends State<CounterView> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const CustomAppMenu(),
         const Spacer(),
         Text(
           'Contador Stateful',
