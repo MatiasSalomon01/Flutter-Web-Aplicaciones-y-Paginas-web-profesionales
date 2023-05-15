@@ -53,6 +53,13 @@ class _TabletDesktopMenu extends StatelessWidget {
             onPressed: () =>
                 locator<NavigationService>().navigatorTo('stateful/100'),
             color: Colors.black,
+          ),
+          const SizedBox(width: 10),
+          CustomFlatButton(
+            text: 'Provider 200',
+            onPressed: () =>
+                locator<NavigationService>().navigatorTo('provider?q=200'),
+            color: Colors.black,
           )
         ],
       ),

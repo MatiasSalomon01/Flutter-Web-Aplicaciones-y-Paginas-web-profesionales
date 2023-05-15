@@ -29,7 +29,10 @@ class Flurorouter {
 
   static final Handler _providerHandler = Handler(
     handlerFunc: (context, parameters) {
-      return const CounterProviderView();
+      print(parameters);
+      return CounterProviderView(
+        base: parameters['q']?[0] ?? '10',
+      );
     },
   );
 
