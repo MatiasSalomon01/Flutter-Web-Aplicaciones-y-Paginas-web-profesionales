@@ -14,28 +14,22 @@ class Flurorouter {
     router.define('/provider',
         handler: _providerHandler, transitionType: TransitionType.none);
     router.define('/stateful/:base',
-        handler: _counterWithParameterHandler,
-        transitionType: TransitionType.none);
+        handler: _counterHandler, transitionType: TransitionType.none);
     router.notFoundHandler = _pageNotFoundHandler;
   }
 
   //Handlers
   static final Handler _counterHandler = Handler(
     handlerFunc: (context, parameters) {
-      return const CounterView();
+      return CounterView(
+        base: parameters['base']?[0] ?? '5',
+      );
     },
   );
 
   static final Handler _providerHandler = Handler(
     handlerFunc: (context, parameters) {
       return const CounterProviderView();
-    },
-  );
-
-  static final Handler _counterWithParameterHandler = Handler(
-    handlerFunc: (context, parameters) {
-      print(parameters['base']?[0]);
-      return const CounterView();
     },
   );
 
