@@ -15,6 +15,8 @@ class Flurorouter {
         handler: _providerHandler, transitionType: TransitionType.none);
     router.define('/stateful/:base',
         handler: _counterHandler, transitionType: TransitionType.none);
+    router.define('/dashboard/user/:name/:id',
+        handler: _multipleQueryHandler, transitionType: TransitionType.none);
     router.notFoundHandler = _pageNotFoundHandler;
   }
 
@@ -29,10 +31,16 @@ class Flurorouter {
 
   static final Handler _providerHandler = Handler(
     handlerFunc: (context, parameters) {
-      print(parameters);
       return CounterProviderView(
         base: parameters['q']?[0] ?? '10',
       );
+    },
+  );
+
+  static final Handler _multipleQueryHandler = Handler(
+    handlerFunc: (context, parameters) {
+      print(parameters);
+      return const View404();
     },
   );
 
