@@ -1,6 +1,4 @@
-import 'package:bases_web/ui/views/counter_provider_view.dart';
-import 'package:bases_web/ui/views/counter_view.dart';
-import 'package:bases_web/ui/views/view_404.dart';
+import 'package:bases_web/router/route_handlers.dart';
 import 'package:fluro/fluro.dart';
 
 class Flurorouter {
@@ -8,45 +6,20 @@ class Flurorouter {
 
   static void configureRoutes() {
     router.define('/',
-        handler: _counterHandler, transitionType: TransitionType.none);
+        handler: counterHandler, transitionType: TransitionType.none);
+
     router.define('/stateful',
-        handler: _counterHandler, transitionType: TransitionType.none);
+        handler: counterHandler, transitionType: TransitionType.none);
+
     router.define('/provider',
-        handler: _providerHandler, transitionType: TransitionType.none);
+        handler: providerHandler, transitionType: TransitionType.none);
+
     router.define('/stateful/:base',
-        handler: _counterHandler, transitionType: TransitionType.none);
+        handler: counterHandler, transitionType: TransitionType.none);
+
     router.define('/dashboard/user/:name/:id',
-        handler: _multipleQueryHandler, transitionType: TransitionType.none);
-    router.notFoundHandler = _pageNotFoundHandler;
+        handler: multipleQueryHandler, transitionType: TransitionType.none);
+
+    router.notFoundHandler = pageNotFoundHandler;
   }
-
-  //Handlers
-  static final Handler _counterHandler = Handler(
-    handlerFunc: (context, parameters) {
-      return CounterView(
-        base: parameters['base']?[0] ?? '5',
-      );
-    },
-  );
-
-  static final Handler _providerHandler = Handler(
-    handlerFunc: (context, parameters) {
-      return CounterProviderView(
-        base: parameters['q']?[0] ?? '10',
-      );
-    },
-  );
-
-  static final Handler _multipleQueryHandler = Handler(
-    handlerFunc: (context, parameters) {
-      print(parameters);
-      return const View404();
-    },
-  );
-
-  static final Handler _pageNotFoundHandler = Handler(
-    handlerFunc: (context, parameters) {
-      return const View404();
-    },
-  );
 }
