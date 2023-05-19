@@ -10,8 +10,19 @@ class CustomAppMenu extends StatefulWidget {
   State<CustomAppMenu> createState() => _CustomAppMenuState();
 }
 
-class _CustomAppMenuState extends State<CustomAppMenu> {
+class _CustomAppMenuState extends State<CustomAppMenu>
+    with SingleTickerProviderStateMixin {
   bool isOpen = false;
+
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -19,6 +30,11 @@ class _CustomAppMenuState extends State<CustomAppMenu> {
       child: GestureDetector(
         onTap: () {
           setState(() {
+            if (isOpen) {
+              controller.reverse();
+            } else {
+              controller.forward();
+            }
             isOpen = !isOpen;
           });
         },
@@ -39,7 +55,12 @@ class _CustomAppMenuState extends State<CustomAppMenu> {
                 style: GoogleFonts.roboto(color: Colors.white, fontSize: 18),
               ),
               const Spacer(),
-              // AnimatedIcon(icon: AnimatedIcons.close_menu, progress: , color: Colors.white,)
+              // Icon(Icons.menu, color: Colors.white)
+              AnimatedIcon(
+                icon: AnimatedIcons.menu_close,
+                progress: controller,
+                color: Colors.white,
+              )
             ],
           ),
         ),
