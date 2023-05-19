@@ -6,7 +6,7 @@ class Flurorouter {
   static final FluroRouter router = FluroRouter();
 
   static void configureRoutes() {
-    router.define(':/page', handler: homeHandler);
+    router.define(':page', handler: homeHandler);
 
     //Page Not Found - Status 404
     router.notFoundHandler = homeHandler;

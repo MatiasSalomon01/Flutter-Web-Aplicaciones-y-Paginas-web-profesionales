@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:scrollable_landing_page/provider/page_provider.dart';
 import 'package:scrollable_landing_page/ui/shared/custom_menu_item.dart';
 
 class CustomAppMenu extends StatefulWidget {
@@ -25,6 +27,7 @@ class _CustomAppMenuState extends State<CustomAppMenu>
 
   @override
   Widget build(BuildContext context) {
+    final pageProvider = Provider.of<PageProvider>(context, listen: false);
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -47,11 +50,26 @@ class _CustomAppMenuState extends State<CustomAppMenu>
             children: [
               _MenuTitle(isOpen: isOpen, controller: controller),
               if (isOpen) ...[
-                CustomMenuItem(delay: 0, text: 'Home', onPressed: () {}),
-                CustomMenuItem(delay: 20, text: 'About', onPressed: () {}),
-                CustomMenuItem(delay: 40, text: 'Princing', onPressed: () {}),
-                CustomMenuItem(delay: 60, text: 'Contact', onPressed: () {}),
-                CustomMenuItem(delay: 80, text: 'Location', onPressed: () {}),
+                CustomMenuItem(
+                    delay: 0,
+                    text: 'Home',
+                    onPressed: () => pageProvider.goTo(0)),
+                CustomMenuItem(
+                    delay: 40,
+                    text: 'About',
+                    onPressed: () => pageProvider.goTo(1)),
+                CustomMenuItem(
+                    delay: 80,
+                    text: 'Princing',
+                    onPressed: () => pageProvider.goTo(2)),
+                CustomMenuItem(
+                    delay: 120,
+                    text: 'Contact',
+                    onPressed: () => pageProvider.goTo(3)),
+                CustomMenuItem(
+                    delay: 160,
+                    text: 'Location',
+                    onPressed: () => pageProvider.goTo(4)),
                 const SizedBox(height: 8)
               ],
             ],
