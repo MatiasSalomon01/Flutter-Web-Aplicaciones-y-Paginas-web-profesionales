@@ -1,5 +1,4 @@
-import 'dart:html';
-
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_landing_page/ui/shared/custom_menu_item.dart';
@@ -48,11 +47,11 @@ class _CustomAppMenuState extends State<CustomAppMenu>
             children: [
               _MenuTitle(isOpen: isOpen, controller: controller),
               if (isOpen) ...[
-                CustomMenuItem(text: 'Home', onPressed: () {}),
-                CustomMenuItem(text: 'About', onPressed: () {}),
-                CustomMenuItem(text: 'Princing', onPressed: () {}),
-                CustomMenuItem(text: 'Contact', onPressed: () {}),
-                CustomMenuItem(text: 'Location', onPressed: () {}),
+                CustomMenuItem(delay: 0, text: 'Home', onPressed: () {}),
+                CustomMenuItem(delay: 20, text: 'About', onPressed: () {}),
+                CustomMenuItem(delay: 40, text: 'Princing', onPressed: () {}),
+                CustomMenuItem(delay: 60, text: 'Contact', onPressed: () {}),
+                CustomMenuItem(delay: 80, text: 'Location', onPressed: () {}),
                 const SizedBox(height: 8)
               ],
             ],
@@ -83,7 +82,7 @@ class _MenuTitle extends StatelessWidget {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
-            width: isOpen ? 50 : 0,
+            width: isOpen ? 45 : 0,
           ),
           Text(
             'Menu',
