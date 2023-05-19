@@ -13,12 +13,23 @@ class PageProvider extends ChangeNotifier {
     'location'
   ];
 
+  int _currentIndex = 0;
+
   int getPageIndex(String routeName) {
-    return _pages.indexOf(routeName) == -1 ? 0 : _pages.indexOf(routeName);
+    return !_pages.contains(routeName) ? 0 : _pages.indexOf(routeName);
   }
 
   createScrollController(String routeName) {
     scrollController = PageController(initialPage: getPageIndex(routeName));
+
+    scrollController.addListener(() {
+      final index = (scrollController.page ?? 0).round();
+
+      if (index != _currentIndex) {
+        html.window.history.pushState(null, 'none', '#/${_pages[index]}');
+        _currentIndex = index;
+      }
+    });
   }
 
   goTo(int index) {
