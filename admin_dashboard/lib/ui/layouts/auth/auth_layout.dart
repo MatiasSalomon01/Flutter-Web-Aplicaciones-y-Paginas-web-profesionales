@@ -1,5 +1,6 @@
 import 'package:admin_dashboard/ui/layouts/auth/widgets/background_twitter.dart';
 import 'package:admin_dashboard/ui/layouts/auth/widgets/custom_title.dart';
+import 'package:admin_dashboard/ui/layouts/auth/widgets/links_bar.dart';
 import 'package:flutter/material.dart';
 
 class AuthLayout extends StatelessWidget {
@@ -10,12 +11,14 @@ class AuthLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
+        physics: const ClampingScrollPhysics(),
         children: [
           //Desktop
-          _DesktopBody(child: child)
+          _DesktopBody(child: child),
           //Mobile
 
           //Links
+          const LinksBar()
         ],
       ),
     );
@@ -31,7 +34,7 @@ class _DesktopBody extends StatelessWidget {
 
     return Container(
       width: size.width,
-      height: size.height,
+      height: size.height * 0.95,
       child: Row(
         children: [
           const BackgroundTwitter(),
