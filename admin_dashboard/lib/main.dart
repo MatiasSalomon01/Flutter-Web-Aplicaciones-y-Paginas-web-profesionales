@@ -1,5 +1,5 @@
 import 'package:admin_dashboard/router/router.dart';
-import 'package:admin_dashboard/ui/layouts/auth_layout.dart';
+import 'package:admin_dashboard/ui/layouts/auth/auth_layout.dart';
 import 'package:flutter/material.dart';
 
 void main() {
