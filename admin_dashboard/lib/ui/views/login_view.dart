@@ -3,6 +3,7 @@ import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/ui/buttons/custom_outlined_button.dart';
 import 'package:admin_dashboard/ui/buttons/link_text.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,13 @@ class LoginView extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
-                        // validator: (value) {},
+                        validator: (value) {
+                          if (!EmailValidator.validate(value ?? '')) {
+                            return 'Email no valido';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) => loginFormProvider.email = value,
                         style: const TextStyle(color: Colors.white),
                         decoration: CustomInputs.loginInputDecoration(
                           hint: 'Ingrese su correo',
@@ -47,6 +54,8 @@ class LoginView extends StatelessWidget {
                           }
                           return null;
                         },
+                        onChanged: (value) =>
+                            loginFormProvider.password = value,
                         obscureText: true,
                         style: const TextStyle(color: Colors.white),
                         decoration: CustomInputs.loginInputDecoration(
