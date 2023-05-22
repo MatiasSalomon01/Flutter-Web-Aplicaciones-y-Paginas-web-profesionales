@@ -14,6 +14,7 @@ class AuthProvider extends ChangeNotifier {
   login(String email, String password) {
     _token = 'asdaosdoasdokasodkasodkasodkasodkasd';
     LocalStorage.prefs.setString('token', _token!);
+    authStatus = AuthStatus.authenticated;
     notifyListeners();
   }
 
@@ -25,7 +26,7 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
 
-    await Future.delayed(const Duration(milliseconds: 1000));
+    // await Future.delayed(const Duration(milliseconds: 100));
     authStatus = AuthStatus.authenticated;
     notifyListeners();
     return true;
