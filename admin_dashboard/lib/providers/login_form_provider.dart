@@ -5,16 +5,14 @@ class LoginFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
-  final AuthProvider authProvider;
 
-  LoginFormProvider(this.authProvider);
-
-  validateForm() {
+  bool validateForm() {
     if (formKey.currentState!.validate()) {
-      print('$email === $password');
-      authProvider.login(email, password);
+      // print('$email === $password');
+      return true;
     } else {
-      print('Form not valid');
+      // print('Form not valid');
+      return false;
     }
   }
 }

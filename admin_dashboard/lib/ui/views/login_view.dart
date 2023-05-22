@@ -15,7 +15,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return ChangeNotifierProvider(
-      create: (context) => LoginFormProvider(authProvider),
+      create: (context) => LoginFormProvider(),
       child: Builder(
         builder: (context) {
           final loginFormProvider =
@@ -69,7 +69,13 @@ class LoginView extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       CustomOutlinedButton(
-                          onPressed: () => loginFormProvider.validateForm(),
+                          onPressed: () {
+                            final isValid = loginFormProvider.validateForm();
+                            if (isValid) {
+                              authProvider.login(loginFormProvider.email,
+                                  loginFormProvider.password);
+                            }
+                          },
                           text: 'Ingresar'),
                       const SizedBox(height: 20),
                       LinkText(
