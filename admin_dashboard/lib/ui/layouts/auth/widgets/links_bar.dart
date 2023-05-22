@@ -8,6 +8,7 @@ class LinksBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
+      padding: const EdgeInsets.only(top: 5),
       height: size.width > 1000 ? size.height * 0.07 : null,
       color: Colors.black,
       child: Wrap(

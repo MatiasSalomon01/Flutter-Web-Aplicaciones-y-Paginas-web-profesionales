@@ -45,9 +45,7 @@ class _DesktopBody extends StatelessWidget {
             color: Colors.black,
             child: Column(
               children: [
-                const SizedBox(height: 20),
                 const CustomTitle(),
-                const SizedBox(height: 50),
                 Expanded(child: child),
               ],
             ),
@@ -70,7 +68,6 @@ class _MobileBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
           const CustomTitle(),
           Container(
             width: double.infinity,
