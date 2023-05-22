@@ -26,6 +26,7 @@ class LoginView extends StatelessWidget {
                 constraints: const BoxConstraints(maxWidth: 370),
                 child: Form(
                   key: loginFormProvider.formKey,
+                  autovalidateMode: AutovalidateMode.always,
                   child: Column(
                     children: [
                       TextFormField(
@@ -66,9 +67,7 @@ class LoginView extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       CustomOutlinedButton(
-                          onPressed: () {
-                            loginFormProvider.validateForm();
-                          },
+                          onPressed: () => loginFormProvider.validateForm(),
                           text: 'Ingresar'),
                       const SizedBox(height: 20),
                       LinkText(
