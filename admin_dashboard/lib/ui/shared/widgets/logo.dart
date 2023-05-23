@@ -19,7 +19,10 @@ class Logo extends StatelessWidget {
           Text(
             'Admin',
             style: GoogleFonts.montserratAlternates(
-                fontSize: 20, fontWeight: FontWeight.w200),
+              fontSize: 20,
+              fontWeight: FontWeight.w300,
+              color: Colors.white.withOpacity(0.8),
+            ),
           )
         ],
       ),
