@@ -8,19 +8,26 @@ class DashboardLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: const Color(0xffedf1f2),
-      body: Row(
+      body: Stack(
         children: [
-          const SideBar(),
-          Expanded(
-            child: Column(
-              children: [
-                const NavBar(),
-                Expanded(child: child),
-              ],
-            ),
+          Row(
+            children: [
+              if (size.width >= 700) const SideBar(),
+              Expanded(
+                child: Column(
+                  children: [
+                    const NavBar(),
+                    Expanded(child: child),
+                  ],
+                ),
+              ),
+            ],
           ),
+          if (size.width < 700) const SideBar(),
         ],
       ),
     );

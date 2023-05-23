@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NavbarAvatar extends StatelessWidget {
   const NavbarAvatar({super.key});
@@ -7,12 +8,14 @@ class NavbarAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipOval(
       child: Container(
-        child: const Image(
-          image: NetworkImage(
-            'https://lh3.google.com/u/0/ogw/AOLn63FaS5AGx-OyPmg9S3jxS-nhcV-aDmx6RJ9w9rmJ=s32-c-mo',
+        color: Colors.indigo,
+        width: 30,
+        height: 30,
+        child: Center(
+          child: Text(
+            'M',
+            style: GoogleFonts.roboto(fontSize: 18, color: Colors.white),
           ),
-          width: 30,
-          height: 30,
         ),
       ),
     );
