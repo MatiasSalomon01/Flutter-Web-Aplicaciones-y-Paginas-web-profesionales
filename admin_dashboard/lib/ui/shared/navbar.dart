@@ -1,3 +1,5 @@
+import 'package:admin_dashboard/ui/shared/widgets/navbar_avatar.dart';
+import 'package:admin_dashboard/ui/shared/widgets/notification_indicator.dart';
 import 'package:admin_dashboard/ui/shared/widgets/search_text.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,12 @@ class NavBar extends StatelessWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 250),
             child: const SearchText(),
-          )
+          ),
+          const Spacer(),
+          const NotificationIndicator(),
+          const SizedBox(width: 10),
+          const NavbarAvatar(),
+          const SizedBox(width: 10),
         ],
       ),
     );
