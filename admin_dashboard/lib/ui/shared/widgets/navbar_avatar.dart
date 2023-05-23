@@ -9,7 +9,7 @@ class NavbarAvatar extends StatelessWidget {
       child: Container(
         child: const Image(
           image: NetworkImage(
-            'https://img.freepik.com/vector-premium/vector-diseno-icono-avatar-persona-uso-multiple-ilustracion-vectorial_625349-284.jpg?w=400',
+            'https://lh3.google.com/u/0/ogw/AOLn63FaS5AGx-OyPmg9S3jxS-nhcV-aDmx6RJ9w9rmJ=s32-c-mo',
           ),
           width: 30,
           height: 30,

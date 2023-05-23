@@ -14,11 +14,8 @@ class NavBar extends StatelessWidget {
       decoration: buildBoxDecoration(),
       child: Row(
         children: [
-          //TODO icono del menu
           IconButton(onPressed: () {}, icon: const Icon(Icons.menu_outlined)),
           const SizedBox(width: 5),
-
-          //Search input
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 250),
             child: const SearchText(),
