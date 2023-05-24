@@ -85,9 +85,10 @@ class SideBar extends StatelessWidget {
             onPressed: () => SideMenuProvider.closeMenu(),
           ),
           MenuItem(
-            text: 'Black',
+            isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
+            text: 'Blank',
             icon: Icons.post_add_outlined,
-            onPressed: () => SideMenuProvider.closeMenu(),
+            onPressed: () => navigateTo(Flurorouter.blankRoute),
           ),
           const SizedBox(height: 30),
           const TextSeparator(text: 'Exit'),
