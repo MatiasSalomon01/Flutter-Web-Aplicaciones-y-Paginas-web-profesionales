@@ -58,7 +58,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
                         child: Container(
                           width: size.width,
                           height: size.height,
-                          color: Colors.black.withOpacity(0.5),
+                          color: Colors.black26,
                         ),
                       ),
                     ),
