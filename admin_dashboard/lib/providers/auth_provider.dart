@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/api/CafeApi.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation_service.dart';
@@ -19,6 +20,14 @@ class AuthProvider extends ChangeNotifier {
     authStatus = AuthStatus.authenticated;
     notifyListeners();
     NavigationService.replaceTo(Flurorouter.dashboardRoute);
+  }
+
+  register(String email, String password, String name) {
+    final data = {"nombre": name, "correo": email, "password": password};
+
+    CafeApi.post('/usuarios', data).then((json) => print(json)).catchError((e) {
+      print('Error en: $e');
+    });
   }
 
   Future<bool> isAuthenticated() async {

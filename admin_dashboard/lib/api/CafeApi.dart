@@ -19,4 +19,14 @@ class CafeApi {
       throw ('Error en el GET $e');
     }
   }
+
+  static Future post(String path, Map<String, dynamic> data) async {
+    final formData = FormData.fromMap(data);
+    try {
+      final res = await _dio.post(path, data: formData);
+      return res.data;
+    } catch (e) {
+      throw ('Error en el POST $e');
+    }
+  }
 }
