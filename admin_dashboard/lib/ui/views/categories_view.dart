@@ -24,6 +24,7 @@ class _CategoriesViewState extends State<CategoriesView> {
   Widget build(BuildContext context) {
     final categorias = Provider.of<CategoriesProvider>(context).categorias;
     return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       physics: const ClampingScrollPhysics(),
       children: [
         Text(
@@ -38,7 +39,7 @@ class _CategoriesViewState extends State<CategoriesView> {
             DataColumn(label: Text('Creado por')),
             DataColumn(label: Text('Acciones')),
           ],
-          source: CategoriesDTS(categorias),
+          source: CategoriesDTS(categorias, context),
           header: const Text('Categorias disponibles', maxLines: 2),
           onRowsPerPageChanged: (value) {
             setState(() {

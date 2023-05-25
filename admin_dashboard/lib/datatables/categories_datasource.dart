@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class CategoriesDTS extends DataTableSource {
   final List<Categoria> categorias;
-
-  CategoriesDTS(this.categorias);
+  final BuildContext context;
+  CategoriesDTS(this.categorias, this.context);
 
   @override
   DataRow getRow(int index) {
@@ -25,7 +25,29 @@ class CategoriesDTS extends DataTableSource {
               icon: const Icon(Icons.edit_outlined),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                final dialog = AlertDialog(
+                  title: const Text('Estas seguro de borrarlo?'),
+                  content: Text('Borrar definitivamente ${category.nombre}?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('No'),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Si, Borrar'),
+                    ),
+                  ],
+                );
+
+                showDialog(
+                  context: context,
+                  builder: (context) => dialog,
+                );
+              },
               icon: Icon(
                 Icons.delete_outline,
                 color: Colors.red.withOpacity(0.8),

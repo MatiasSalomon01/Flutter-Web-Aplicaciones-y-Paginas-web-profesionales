@@ -11,6 +11,7 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);
     return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       physics: const ClampingScrollPhysics(),
       children: [
         Text(
