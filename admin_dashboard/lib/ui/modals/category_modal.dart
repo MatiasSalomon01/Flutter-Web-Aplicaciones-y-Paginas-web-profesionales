@@ -1,8 +1,10 @@
 import 'package:admin_dashboard/models/http/category.dart';
+import 'package:admin_dashboard/providers/categories_provider.dart';
 import 'package:admin_dashboard/ui/buttons/custom_outlined_button.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoryModal extends StatefulWidget {
   final Categoria? categoria;
@@ -25,6 +27,8 @@ class _CategoryModalState extends State<CategoryModal> {
 
   @override
   Widget build(BuildContext context) {
+    final categoryProvider =
+        Provider.of<CategoriesProvider>(context, listen: false);
     return Container(
       padding: const EdgeInsets.all(20),
       height: 500,
@@ -41,9 +45,7 @@ class _CategoryModalState extends State<CategoryModal> {
                 ),
               ),
               IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed: () => Navigator.of(context).pop(),
                 icon: const Icon(
                   Icons.close,
                   color: Colors.white,
@@ -67,7 +69,12 @@ class _CategoryModalState extends State<CategoryModal> {
             margin: const EdgeInsets.only(top: 30),
             alignment: Alignment.center,
             child: CustomOutlinedButton(
-              onPressed: () async {},
+              onPressed: () async {
+                if (id == null) {
+                  await categoryProvider.newCategory(nombre);
+                } else {}
+                Navigator.of(context).pop();
+              },
               text: 'Guardar',
               color: Colors.white,
             ),
