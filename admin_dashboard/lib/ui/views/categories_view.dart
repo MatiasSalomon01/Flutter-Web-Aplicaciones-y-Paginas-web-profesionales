@@ -1,7 +1,9 @@
 import 'package:admin_dashboard/datatables/categories_datasource.dart';
+import 'package:admin_dashboard/providers/categories_provider.dart';
 import 'package:admin_dashboard/ui/buttons/custom_icon_button.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesView extends StatefulWidget {
   const CategoriesView({super.key});
@@ -12,6 +14,12 @@ class CategoriesView extends StatefulWidget {
 
 class _CategoriesViewState extends State<CategoriesView> {
   int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
+
+  @override
+  void initState() {
+    Provider.of<CategoriesProvider>(context, listen: false).getCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -30,7 +38,7 @@ class _CategoriesViewState extends State<CategoriesView> {
             DataColumn(label: Text('Acciones')),
           ],
           source: CategoriesDTS(),
-          header: Text('Categorias disponibles', maxLines: 2),
+          header: const Text('Categorias disponibles', maxLines: 2),
           onRowsPerPageChanged: (value) {
             setState(() {
               _rowPerPage = value ?? 10;
