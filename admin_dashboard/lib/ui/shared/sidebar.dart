@@ -50,7 +50,9 @@ class SideBar extends StatelessWidget {
           MenuItem(
             text: 'Categories',
             icon: Icons.layers_outlined,
-            onPressed: () => SideMenuProvider.closeMenu(),
+            onPressed: () => navigateTo(Flurorouter.categoriesRoute),
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.categoriesRoute,
           ),
           MenuItem(
             text: 'Products',
