@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: NavigationService.navigatorKey,
       scaffoldMessengerKey: NotificationService.messengerKey,
       builder: (context, child) {
-        final authProvider = Provider.of<AuthProvider>(context, listen: false);
+        final authProvider = Provider.of<AuthProvider>(context);
 
         if (authProvider.authStatus == AuthStatus.checking) {
           return const SplashLayout();
