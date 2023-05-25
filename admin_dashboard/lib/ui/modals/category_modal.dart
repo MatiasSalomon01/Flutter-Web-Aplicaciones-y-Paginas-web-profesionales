@@ -72,7 +72,9 @@ class _CategoryModalState extends State<CategoryModal> {
               onPressed: () async {
                 if (id == null) {
                   await categoryProvider.newCategory(nombre);
-                } else {}
+                } else {
+                  await categoryProvider.updateCategory(id!, nombre);
+                }
                 Navigator.of(context).pop();
               },
               text: 'Guardar',

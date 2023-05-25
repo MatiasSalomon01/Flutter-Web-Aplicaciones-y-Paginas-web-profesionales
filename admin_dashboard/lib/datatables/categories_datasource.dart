@@ -1,5 +1,6 @@
 import 'package:admin_dashboard/models/http/category.dart';
 import 'package:admin_dashboard/services/notifications_service.dart';
+import 'package:admin_dashboard/ui/modals/category_modal.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesDTS extends DataTableSource {
@@ -20,7 +21,11 @@ class CategoriesDTS extends DataTableSource {
           children: [
             IconButton(
               onPressed: () {
-                NotificationService.showSnackbarError('Editando: $category');
+                showModalBottomSheet(
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) => CategoryModal(categoria: category),
+                );
               },
               icon: const Icon(Icons.edit_outlined),
             ),

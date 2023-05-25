@@ -25,4 +25,21 @@ class CategoriesProvider extends ChangeNotifier {
       NotificationService.showSnackbarError('Error al crear categoria: $e');
     }
   }
+
+  Future updateCategory(String id, String name) async {
+    final data = {"nombre": name};
+    try {
+      await CafeApi.put('/categorias/$id', data);
+
+      categorias = categorias.map((category) {
+        if (category.id != id) return category;
+        category.nombre = name;
+        return category;
+      }).toList();
+
+      notifyListeners();
+    } catch (e) {
+      NotificationService.showSnackbarError('Error al crear categoria: $e');
+    }
+  }
 }
