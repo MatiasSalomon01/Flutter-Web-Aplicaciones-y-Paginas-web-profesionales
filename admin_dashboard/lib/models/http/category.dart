@@ -28,12 +28,11 @@ class Categoria {
         "usuario": usuario.toJson(),
       };
 
-  // @override
-  // String toString() {
-  //   return super.toString(){
-  //     return 'Ct'
-  //   };
-  // }
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "$id, $nombre";
+  }
 }
 
 class _Usuario {
