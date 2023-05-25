@@ -18,11 +18,19 @@ class AuthProvider extends ChangeNotifier {
   }
 
   login(String email, String password) {
-    _token = 'asdaosdoasdokasodkasodkasodkasodkasd';
-    LocalStorage.prefs.setString('token', _token!);
-    authStatus = AuthStatus.authenticated;
-    notifyListeners();
-    NavigationService.replaceTo(Flurorouter.dashboardRoute);
+    final data = {"correo": email, "password": password};
+
+    CafeApi.post('/auth/login', data).then((json) {
+      final authResponse = AuthResponse.fromJson(json);
+      user = authResponse.usuario;
+
+      authStatus = AuthStatus.authenticated;
+      LocalStorage.prefs.setString('token', authResponse.token);
+      NavigationService.replaceTo(Flurorouter.dashboardRoute);
+      notifyListeners();
+    }).catchError((e) {
+      NotificationService.showSnackbarError("Usuario o Contraseña incorrecto");
+    });
   }
 
   register(String email, String password, String name) {
