@@ -32,6 +32,8 @@ class LoginView extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
+                        onFieldSubmitted: (_) =>
+                            onFormSubmitted(loginFormProvider, authProvider),
                         validator: (value) {
                           if (!EmailValidator.validate(value ?? '')) {
                             return 'Email no valido';
@@ -48,6 +50,8 @@ class LoginView extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
+                        onFieldSubmitted: (_) =>
+                            onFormSubmitted(loginFormProvider, authProvider),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Ingrese su contraseña';
@@ -69,13 +73,8 @@ class LoginView extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       CustomOutlinedButton(
-                          onPressed: () {
-                            final isValid = loginFormProvider.validateForm();
-                            if (isValid) {
-                              authProvider.login(loginFormProvider.email,
-                                  loginFormProvider.password);
-                            }
-                          },
+                          onPressed: () =>
+                              onFormSubmitted(loginFormProvider, authProvider),
                           text: 'Ingresar'),
                       const SizedBox(height: 20),
                       LinkText(
@@ -94,5 +93,13 @@ class LoginView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void onFormSubmitted(
+      LoginFormProvider loginFormProvider, AuthProvider authProvider) {
+    final isValid = loginFormProvider.validateForm();
+    if (isValid) {
+      authProvider.login(loginFormProvider.email, loginFormProvider.password);
+    }
   }
 }
