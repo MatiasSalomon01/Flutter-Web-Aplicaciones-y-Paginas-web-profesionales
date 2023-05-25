@@ -27,6 +27,8 @@ class AuthProvider extends ChangeNotifier {
       authStatus = AuthStatus.authenticated;
       LocalStorage.prefs.setString('token', authResponse.token);
       NavigationService.replaceTo(Flurorouter.dashboardRoute);
+      CafeApi.configureDio();
+
       notifyListeners();
     }).catchError((e) {
       NotificationService.showSnackbarError("Usuario o Contraseña incorrecto");
@@ -37,16 +39,16 @@ class AuthProvider extends ChangeNotifier {
     final data = {"nombre": name, "correo": email, "password": password};
 
     CafeApi.post('/usuarios', data).then((json) {
-      print(json);
       final authResponse = AuthResponse.fromJson(json);
       user = authResponse.usuario;
 
       authStatus = AuthStatus.authenticated;
       LocalStorage.prefs.setString('token', authResponse.token);
       NavigationService.replaceTo(Flurorouter.dashboardRoute);
+      CafeApi.configureDio();
+
       notifyListeners();
     }).catchError((e) {
-      print('Error en: $e');
       NotificationService.showSnackbarError('Usuario / Password no validos');
     });
   }
@@ -59,9 +61,18 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
 
-    // await Future.delayed(const Duration(milliseconds: 100));
-    authStatus = AuthStatus.authenticated;
-    notifyListeners();
-    return true;
+    try {
+      final res = await CafeApi.httpGet('/auth');
+      final authResponse = AuthResponse.fromJson(res);
+      user = authResponse.usuario;
+
+      authStatus = AuthStatus.authenticated;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      authStatus = AuthStatus.notAuthenticated;
+      notifyListeners();
+      return false;
+    }
   }
 }
