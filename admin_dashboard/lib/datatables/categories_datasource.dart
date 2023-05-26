@@ -1,7 +1,9 @@
 import 'package:admin_dashboard/models/http/category.dart';
+import 'package:admin_dashboard/providers/categories_provider.dart';
 import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:admin_dashboard/ui/modals/category_modal.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesDTS extends DataTableSource {
   final List<Categoria> categorias;
@@ -42,7 +44,13 @@ class CategoriesDTS extends DataTableSource {
                       child: const Text('No'),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await Provider.of<CategoriesProvider>(context,
+                                listen: false)
+                            .deleteCategory(category.id);
+
+                        Navigator.of(context).pop();
+                      },
                       child: const Text('Si, Borrar'),
                     ),
                   ],

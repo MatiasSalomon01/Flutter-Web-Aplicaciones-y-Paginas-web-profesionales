@@ -42,4 +42,16 @@ class CategoriesProvider extends ChangeNotifier {
       NotificationService.showSnackbarError('Error al crear categoria: $e');
     }
   }
+
+  Future deleteCategory(String id) async {
+    try {
+      await CafeApi.delete('/categorias/$id');
+
+      categorias.removeWhere((categoria) => categoria.id == id);
+
+      notifyListeners();
+    } catch (e) {
+      NotificationService.showSnackbarError('Error al crear categoria: $e');
+    }
+  }
 }

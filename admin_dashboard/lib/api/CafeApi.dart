@@ -39,4 +39,13 @@ class CafeApi {
       throw ('Error en el PUT $e');
     }
   }
+
+  static Future delete(String path) async {
+    try {
+      final res = await _dio.delete(path);
+      return res.data;
+    } catch (e) {
+      throw ('Error en el PUT $e');
+    }
+  }
 }
