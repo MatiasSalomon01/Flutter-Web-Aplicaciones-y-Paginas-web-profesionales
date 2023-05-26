@@ -39,7 +39,8 @@ class CategoriesProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      NotificationService.showSnackbarError('Error al crear categoria: $e');
+      NotificationService.showSnackbarError(
+          'Error al actualizar categoria: $e');
     }
   }
 
@@ -51,7 +52,7 @@ class CategoriesProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      NotificationService.showSnackbarError('Error al crear categoria: $e');
+      NotificationService.showSnackbarError('Error al eliminar categoria: $e');
     }
   }
 }

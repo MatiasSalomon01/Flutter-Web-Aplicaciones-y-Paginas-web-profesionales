@@ -1,5 +1,6 @@
 import 'package:admin_dashboard/models/http/category.dart';
 import 'package:admin_dashboard/providers/categories_provider.dart';
+import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:admin_dashboard/ui/buttons/custom_outlined_button.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
@@ -70,12 +71,20 @@ class _CategoryModalState extends State<CategoryModal> {
             alignment: Alignment.center,
             child: CustomOutlinedButton(
               onPressed: () async {
-                if (id == null) {
-                  await categoryProvider.newCategory(nombre);
-                } else {
-                  await categoryProvider.updateCategory(id!, nombre);
+                try {
+                  if (id == null) {
+                    await categoryProvider.newCategory(nombre);
+                    NotificationService.showSnackbar('$nombre creado!');
+                  } else {
+                    await categoryProvider.updateCategory(id!, nombre);
+                    NotificationService.showSnackbar('$nombre actualizado!');
+                  }
+                  Navigator.of(context).pop();
+                } catch (e) {
+                  Navigator.of(context).pop();
+                  NotificationService.showSnackbarError(
+                      'No se pudo guardar la categoria');
                 }
-                Navigator.of(context).pop();
               },
               text: 'Guardar',
               color: Colors.white,
