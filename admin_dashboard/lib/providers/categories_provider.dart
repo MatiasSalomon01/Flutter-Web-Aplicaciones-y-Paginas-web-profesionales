@@ -1,6 +1,6 @@
 import 'package:admin_dashboard/api/CafeApi.dart';
 import 'package:admin_dashboard/models/http/categories_response.dart';
-import 'package:admin_dashboard/models/http/category.dart';
+import 'package:admin_dashboard/models/category.dart';
 import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 
