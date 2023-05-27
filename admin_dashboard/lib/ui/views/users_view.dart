@@ -10,7 +10,7 @@ class UsersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usersProvider = Provider.of<UsersProvider>(context);
+    final users = Provider.of<UsersProvider>(context).users;
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       physics: const ClampingScrollPhysics(),
@@ -28,7 +28,7 @@ class UsersView extends StatelessWidget {
             DataColumn(label: Text('UID')),
             DataColumn(label: Text('Acciones')),
           ],
-          source: UsersDTS(),
+          source: UsersDTS(users),
         ),
       ],
     );
