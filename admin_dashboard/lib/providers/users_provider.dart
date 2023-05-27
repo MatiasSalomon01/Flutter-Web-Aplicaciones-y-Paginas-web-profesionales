@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class UsersProvider extends ChangeNotifier {
   List<Usuario> users = [];
   bool isLoading = true;
+  bool ascending = true;
+  int? sortColumnIndex;
 
   UsersProvider() {
     getPaginatedUsers();
@@ -25,9 +27,12 @@ class UsersProvider extends ChangeNotifier {
         final aValue = getField(a);
         final bValue = getField(b);
 
-        return Comparable.compare(aValue, bValue);
+        return ascending
+            ? Comparable.compare(aValue, bValue)
+            : Comparable.compare(bValue, aValue);
       },
     );
+    ascending = !ascending;
     notifyListeners();
   }
 }
