@@ -10,7 +10,7 @@ class UsersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final users = Provider.of<UsersProvider>(context).users;
+    final usersProvider = Provider.of<UsersProvider>(context);
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       physics: const ClampingScrollPhysics(),
@@ -21,14 +21,22 @@ class UsersView extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         PaginatedDataTable(
-          columns: const [
-            DataColumn(label: Text('Avatar')),
-            DataColumn(label: Text('Nombre')),
-            DataColumn(label: Text('Email')),
-            DataColumn(label: Text('UID')),
-            DataColumn(label: Text('Acciones')),
+          columns: [
+            const DataColumn(label: Text('Avatar')),
+            DataColumn(
+              label: const Text('Nombre'),
+              onSort: (columnIndex, ascending) =>
+                  usersProvider.sort((user) => user.nombre),
+            ),
+            DataColumn(
+              label: const Text('Email'),
+              onSort: (columnIndex, ascending) =>
+                  usersProvider.sort((user) => user.correo),
+            ),
+            const DataColumn(label: Text('UID')),
+            const DataColumn(label: Text('Acciones')),
           ],
-          source: UsersDTS(users),
+          source: UsersDTS(usersProvider.users),
         ),
       ],
     );

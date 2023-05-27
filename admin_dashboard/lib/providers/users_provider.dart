@@ -18,4 +18,16 @@ class UsersProvider extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  void sort<T>(Comparable<T> Function(Usuario user) getField) {
+    users.sort(
+      (a, b) {
+        final aValue = getField(a);
+        final bValue = getField(b);
+
+        return Comparable.compare(aValue, bValue);
+      },
+    );
+    notifyListeners();
+  }
 }
