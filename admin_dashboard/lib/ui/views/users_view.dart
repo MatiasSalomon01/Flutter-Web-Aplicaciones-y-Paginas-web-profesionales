@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/datatables/users_datasource.dart';
 import 'package:admin_dashboard/ui/cards/white_card.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,15 @@ class UsersView extends StatelessWidget {
           style: CustomLabels.h1,
         ),
         const SizedBox(height: 10),
-        const WhiteCard(
-          title: 'Users View',
-          child: Text('Blank View'),
+        PaginatedDataTable(
+          columns: const [
+            DataColumn(label: Text('Avatar')),
+            DataColumn(label: Text('Nombre')),
+            DataColumn(label: Text('Email')),
+            DataColumn(label: Text('UID')),
+            DataColumn(label: Text('Acciones')),
+          ],
+          source: UsersDTS(),
         ),
       ],
     );
