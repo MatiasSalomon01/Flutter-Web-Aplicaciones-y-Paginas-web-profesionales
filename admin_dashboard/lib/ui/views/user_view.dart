@@ -233,10 +233,12 @@ class _AvatarContainer extends StatelessWidget {
                           );
 
                           if (result != null) {
+                            NotificationService.showBusyIndicator(context);
                             final res = await userFormProvider.uploadImage(
                               '/uploads/usuarios/${user!.uid}',
                               result.files.first.bytes!,
                             );
+                            Navigator.of(context).pop();
                           } else {
                             // User canceled the picker
                           }
