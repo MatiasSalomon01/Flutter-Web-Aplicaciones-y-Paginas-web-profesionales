@@ -1,6 +1,7 @@
 import 'package:admin_dashboard/models/usuario.dart';
 import 'package:admin_dashboard/providers/users_provider.dart';
 import 'package:admin_dashboard/ui/cards/white_card.dart';
+import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,18 +66,78 @@ class _UserViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Table(
-        columnWidths: {0: FixedColumnWidth(250)},
-        children: [
+        columnWidths: const {
+          0: FixedColumnWidth(250),
+        },
+        children: const [
           TableRow(
             children: [
-              const _AvatarContainer(),
-              Container(
-                color: Colors.green,
-                height: 200,
-              ),
+              _AvatarContainer(),
+              _UserViewForm(),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _UserViewForm extends StatelessWidget {
+  const _UserViewForm({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return WhiteCard(
+      title: 'Informacion General',
+      child: Form(
+        autovalidateMode: AutovalidateMode.always,
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: CustomInputs.formInputDecoration(
+                hint: 'Nombre del Usuario',
+                label: 'Nombre',
+                icon: Icons.supervised_user_circle_outlined,
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              decoration: CustomInputs.formInputDecoration(
+                hint: 'Correo del Usuario',
+                label: 'Correo',
+                icon: Icons.mark_email_read_outlined,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                      shadowColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.save_outlined,
+                          size: 20,
+                        ),
+                        Text('  Guardar'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
