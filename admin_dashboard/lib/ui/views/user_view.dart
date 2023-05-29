@@ -8,6 +8,7 @@ import 'package:admin_dashboard/ui/labels/custom_labels.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:file_picker/file_picker.dart';
 
 class UserView extends StatefulWidget {
   final String uid;
@@ -225,7 +226,23 @@ class _AvatarContainer extends StatelessWidget {
                         ),
                       ),
                       child: FloatingActionButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles(
+                            allowMultiple: false,
+                          );
+
+                          if (result != null) {
+                            PlatformFile file = result.files.first;
+
+                            print(file.name);
+                            print(file.bytes);
+                            print(file.size);
+                            print(file.extension);
+                          } else {
+                            // User canceled the picker
+                          }
+                        },
                         backgroundColor: Colors.indigo,
                         elevation: 0,
                         child: const Icon(
