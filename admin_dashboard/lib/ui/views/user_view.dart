@@ -45,12 +45,42 @@ class _UserViewState extends State<UserView> {
               ),
             ),
           ),
-
+        const _UserViewBody()
         // WhiteCard(
         //   title: 'User View',
         //   child: Text('UID: ${widget.uid}'),
         // ),
       ],
+    );
+  }
+}
+
+class _UserViewBody extends StatelessWidget {
+  const _UserViewBody({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Table(
+        columnWidths: {0: FixedColumnWidth(250)},
+        children: [
+          TableRow(
+            children: [
+              Container(
+                color: Colors.red,
+                width: 250,
+                height: 200,
+              ),
+              Container(
+                color: Colors.green,
+                height: 200,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
