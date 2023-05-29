@@ -190,6 +190,7 @@ class _AvatarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final usersFormProvider = Provider.of<UsersProvider>(context);
     final userFormProvider = Provider.of<UserFormProvider>(context);
     final user = userFormProvider.user;
     final img = user?.img == null
@@ -215,7 +216,7 @@ class _AvatarContainer extends StatelessWidget {
               height: 150,
               child: Stack(
                 children: [
-                  ClipOval(child: img),
+                  Container(child: img),
                   Positioned(
                     right: 5,
                     bottom: 5,
@@ -242,6 +243,7 @@ class _AvatarContainer extends StatelessWidget {
                               '/uploads/usuarios/${user!.uid}',
                               result.files.first.bytes!,
                             );
+                            usersFormProvider.refreshUser(res);
                             Navigator.of(context).pop();
                           } else {
                             // User canceled the picker
