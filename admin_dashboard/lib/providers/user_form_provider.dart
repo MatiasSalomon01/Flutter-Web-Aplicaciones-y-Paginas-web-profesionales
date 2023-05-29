@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:admin_dashboard/api/CafeApi.dart';
 import 'package:admin_dashboard/models/usuario.dart';
 import 'package:dio/dio.dart';
@@ -24,6 +26,17 @@ class UserFormProvider extends ChangeNotifier {
       return true;
     } on DioError catch (e) {
       throw ('Error en el PUT $e');
+    }
+  }
+
+  Future<Usuario> uploadImage(String path, Uint8List bytes) async {
+    try {
+      final res = await CafeApi.uploadFile(path, bytes);
+      user = Usuario.fromJson(res);
+      notifyListeners();
+      return user!;
+    } catch (e) {
+      throw ('Error en el upload image $e');
     }
   }
 
