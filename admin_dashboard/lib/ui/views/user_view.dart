@@ -1,6 +1,7 @@
 import 'package:admin_dashboard/models/usuario.dart';
 import 'package:admin_dashboard/providers/user_form_provider.dart';
 import 'package:admin_dashboard/providers/users_provider.dart';
+import 'package:admin_dashboard/services/notifications_service.dart';
 import 'package:admin_dashboard/ui/cards/white_card.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
@@ -145,8 +146,16 @@ class _UserViewForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(0),
                   child: ElevatedButton(
-                    onPressed: () {
-                      userFormProvider.updateUser();
+                    onPressed: () async {
+                      final saved = await userFormProvider.updateUser();
+                      if (saved) {
+                        NotificationService.showSnackbar('Usuario Actualizado');
+                        Provider.of<UsersProvider>(context, listen: false)
+                            .getPaginatedUsers();
+                      } else {
+                        NotificationService.showSnackbarError(
+                            'No se pudo guardar');
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.indigo),
@@ -180,8 +189,7 @@ class _AvatarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userFormProvider =
-        Provider.of<UserFormProvider>(context, listen: false);
+    final userFormProvider = Provider.of<UserFormProvider>(context);
     final user = userFormProvider.user;
     return WhiteCard(
       width: 250,
