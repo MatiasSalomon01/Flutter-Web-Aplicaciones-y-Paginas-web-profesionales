@@ -151,7 +151,7 @@ class _UserViewForm extends StatelessWidget {
                       if (saved) {
                         NotificationService.showSnackbar('Usuario Actualizado');
                         Provider.of<UsersProvider>(context, listen: false)
-                            .getPaginatedUsers();
+                            .refreshUser(user);
                       } else {
                         NotificationService.showSnackbarError(
                             'No se pudo guardar');
