@@ -44,8 +44,9 @@ class _UserViewState extends State<UserView> {
                 child: CircularProgressIndicator(),
               ),
             ),
-          ),
-        const _UserViewBody()
+          )
+        else
+          const _UserViewBody()
         // WhiteCard(
         //   title: 'User View',
         //   child: Text('UID: ${widget.uid}'),
@@ -68,11 +69,7 @@ class _UserViewBody extends StatelessWidget {
         children: [
           TableRow(
             children: [
-              Container(
-                color: Colors.red,
-                width: 250,
-                height: 200,
-              ),
+              const _AvatarContainer(),
               Container(
                 color: Colors.green,
                 height: 200,
@@ -80,6 +77,72 @@ class _UserViewBody extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _AvatarContainer extends StatelessWidget {
+  const _AvatarContainer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return WhiteCard(
+      width: 250,
+      child: Container(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Profile', style: CustomLabels.h2),
+            const SizedBox(height: 20),
+            Container(
+              width: 150,
+              height: 150,
+              child: Stack(
+                children: [
+                  ClipOval(
+                    child: Image(
+                      image: AssetImage('no-image.jpg'),
+                    ),
+                  ),
+                  Positioned(
+                    right: 5,
+                    bottom: 5,
+                    child: Container(
+                      width: 45,
+                      height: 45,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 5,
+                        ),
+                      ),
+                      child: FloatingActionButton(
+                        onPressed: () {},
+                        backgroundColor: Colors.indigo,
+                        elevation: 0,
+                        child: const Icon(
+                          Icons.camera_alt_outlined,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Nombre de usuario',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
       ),
     );
   }
