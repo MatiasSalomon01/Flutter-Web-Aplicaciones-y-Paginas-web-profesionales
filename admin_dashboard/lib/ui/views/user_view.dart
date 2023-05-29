@@ -1,4 +1,5 @@
 import 'package:admin_dashboard/models/usuario.dart';
+import 'package:admin_dashboard/providers/user_form_provider.dart';
 import 'package:admin_dashboard/providers/users_provider.dart';
 import 'package:admin_dashboard/ui/cards/white_card.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
@@ -20,9 +21,12 @@ class _UserViewState extends State<UserView> {
   void initState() {
     super.initState();
     final usersProvider = Provider.of<UsersProvider>(context, listen: false);
-    usersProvider
-        .getUserById(widget.uid)
-        .then((userDB) => setState(() => user = userDB));
+    final userFormProvider =
+        Provider.of<UserFormProvider>(context, listen: false);
+    usersProvider.getUserById(widget.uid).then((userDB) {
+      userFormProvider.user = userDB;
+      setState(() => user = userDB);
+    });
   }
 
   @override
@@ -89,6 +93,9 @@ class _UserViewForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userFormProvider =
+        Provider.of<UserFormProvider>(context, listen: false);
+    final user = userFormProvider.user;
     return WhiteCard(
       title: 'Informacion General',
       child: Form(
@@ -96,6 +103,7 @@ class _UserViewForm extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              initialValue: user!.nombre,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Nombre del Usuario',
                 label: 'Nombre',
@@ -104,6 +112,7 @@ class _UserViewForm extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextFormField(
+              initialValue: user.correo,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Correo del Usuario',
                 label: 'Correo',
