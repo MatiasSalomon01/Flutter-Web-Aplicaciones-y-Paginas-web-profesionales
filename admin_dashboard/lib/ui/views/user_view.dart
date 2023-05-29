@@ -4,6 +4,7 @@ import 'package:admin_dashboard/providers/users_provider.dart';
 import 'package:admin_dashboard/ui/cards/white_card.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -99,6 +100,7 @@ class _UserViewForm extends StatelessWidget {
     return WhiteCard(
       title: 'Informacion General',
       child: Form(
+        key: userFormProvider.formKey,
         autovalidateMode: AutovalidateMode.always,
         child: Column(
           children: [
@@ -109,6 +111,15 @@ class _UserViewForm extends StatelessWidget {
                 label: 'Nombre',
                 icon: Icons.supervised_user_circle_outlined,
               ),
+              onChanged: (value) =>
+                  userFormProvider.copyUserWith(nombre: value),
+              validator: (value) {
+                if (value == null || value.isEmpty) return 'Ingrese un nombre';
+                if (value.length < 2) {
+                  return 'El nombre debe  de ser de dos letras como minimo';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 20),
             TextFormField(
@@ -118,6 +129,14 @@ class _UserViewForm extends StatelessWidget {
                 label: 'Correo',
                 icon: Icons.mark_email_read_outlined,
               ),
+              onChanged: (value) =>
+                  userFormProvider.copyUserWith(correo: value),
+              validator: (value) {
+                if (!EmailValidator.validate(value ?? '')) {
+                  return 'Email no valido';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 20),
             Row(
@@ -126,7 +145,9 @@ class _UserViewForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      userFormProvider.updateUser();
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.indigo),
                       shadowColor:
@@ -159,6 +180,9 @@ class _AvatarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userFormProvider =
+        Provider.of<UserFormProvider>(context, listen: false);
+    final user = userFormProvider.user;
     return WhiteCard(
       width: 250,
       child: Container(
@@ -207,9 +231,9 @@ class _AvatarContainer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Nombre de usuario',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            Text(
+              user!.nombre,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             )
           ],
         ),
