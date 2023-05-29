@@ -192,6 +192,14 @@ class _AvatarContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final userFormProvider = Provider.of<UserFormProvider>(context);
     final user = userFormProvider.user;
+    final img = user?.img == null
+        ? const Image(
+            image: AssetImage('no-image.jpg'),
+          )
+        : FadeInImage.assetNetwork(
+            placeholder: 'loader.gif',
+            image: user!.img!,
+          );
     return WhiteCard(
       width: 250,
       child: Container(
@@ -207,11 +215,7 @@ class _AvatarContainer extends StatelessWidget {
               height: 150,
               child: Stack(
                 children: [
-                  ClipOval(
-                    child: Image(
-                      image: AssetImage('no-image.jpg'),
-                    ),
-                  ),
+                  ClipOval(child: img),
                   Positioned(
                     right: 5,
                     bottom: 5,
